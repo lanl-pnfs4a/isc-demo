@@ -131,3 +131,57 @@ Client node:
 9. mount fuse
 10. start presto
 11. start vtk
+
+
+-----------
+Demo layout
+-----------
+
+Data server node
+demo
+├── bin
+│   └── run_pushdown_srvr_needs_sudo.sh
+├── lib
+│   └── pushdown-srvr
+│       ├── libexec
+│       └── src
+├── opt
+│   └── duckdb
+│       └── extensions
+└── var
+    ├── MANIFEST
+    ├── pv_insitu_300x300x300_00000.parquet.br
+    ├── pv_insitu_300x300x300_01141.parquet.br
+    ├── pv_insitu_300x300x300_03429.parquet.br
+    ├── pv_insitu_300x300x300_06817.parquet.br
+    ├── pv_insitu_300x300x300_09782.parquet.br
+    ├── pv_insitu_300x300x300_12244.parquet.br
+    ├── pv_insitu_300x300x300_15159.parquet.br
+    ├── pv_insitu_300x300x300_18124.parquet.br
+    ├── pv_insitu_300x300x300_21073.parquet.br
+    ├── pv_insitu_300x300x300_24095.parquet.br
+    ├── pv_insitu_300x300x300_32088.parquet.br
+    ├── pv_insitu_300x300x300_40045.parquet.br
+    └── pv_insitu_300x300x300_49978.parquet.br
+
+
+Client node
+demo
+├── bin
+│   ├── presto
+│   ├── presto-server
+│   └── run-viz.sh
+├── lib
+│   └── vtk-app
+│       ├── libexec
+│       └── src
+└── opt
+    ├── jvm
+    │   └── jdk-11.0.25
+    └── presto
+        ├── bin
+        ├── etc
+        ├── lib
+        ├── plugin
+        └── presto-cli-0.292-executable.jar
+
