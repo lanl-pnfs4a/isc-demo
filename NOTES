@@ -100,6 +100,9 @@ Splits: 18 total, 18 done (100.00%)
 Run VTK demo server:
 /home/rocky/demo/bin/run-viz.sh
 
+VTK http port
+8088
+
 VTK log
 /tmp/viz.log
 
