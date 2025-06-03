@@ -111,5 +111,23 @@ ps aux | grep 'vtk-app/src/viz_srvr.py'
 kill -9 <pid>
 
 
+----------------
+RESTART SEQUENCE
+----------------
 
+Client node:
+1. kill vtk
+2. kill presto
+3. umount fuse
 
+Data server node:
+4. unexport fuse
+5. umount fuse
+6. find and kill grpc servers if there is any
+7. mount fuse
+8. export fuse
+
+Client node:
+9. mount fuse
+10. start presto
+11. start vtk
