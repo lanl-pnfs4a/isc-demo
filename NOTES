@@ -1,0 +1,112 @@
+-----------
+DATA SERVER
+-----------
+
+IP
+172.27.47.111 for ssh
+192.168.1.101 for nfs io
+
+Login info
+username: rocky
+password: rocky
+
+Anvil mount point
+/mnt/nfs
+
+Fuse mount point
+/mnt/fuse
+
+Run fuse daemon
+sudo /home/rocky/demo/bin/run_pushdown_srvr_needs_sudo.sh
+
+Fuse log
+/tmp/fuse.log
+
+Umount fuse
+sudo umount /mnt/fuse
+
+gRPC server log
+/tmp/srvr-<pid>.log
+
+Find and kill gRPC server
+ps aux | grep 'pushdown-srvr/src/srvr.py'
+kill -9 <pid>
+
+Export fuse
+sudo vim /etc/exports
+sudo exportfs -a
+
+Unexport fuse
+sudo vim /etc/exports
+sudo exportfs -r
+
+
+-----------
+CLIENT NODE
+-----------
+
+IP
+172.27.47.115 for ssh
+192.168.1.103 for nfs io
+
+Login info
+username: rocky
+password: rocky
+
+Anvil mount point
+/mnt/nfs
+
+Fuse mount point
+/mnt/pushdown/192.168.1.101
+
+Mount fuse
+sudo mount 192.168.1.101:/mnt/fuse /mnt/pushdown/192.168.1.101
+
+Run, check, stop, or kill presto srvr
+/home/rocky/demo/bin/presto-server start
+/home/rocky/demo/bin/presto-server status
+/home/rocky/demo/bin/presto-server stop
+/home/rocky/demo/bin/presto-server kill
+
+Presto log
+/tmp/presto-data/var/log/server.log
+
+Run presto cli (testing)
+/home/rocky/demo/bin/presto
+
+Test SQL command:
+select tev from isc.demo.pv_insitu_300x300x300_12244 where v02 > 0.001 and v02 < 0.999 limit 10;
+
+Sample SQL output:
+presto> select tev from isc.demo.pv_insitu_300x300x300_12244 where v02 > 0.001 and v02 < 0.999 limit 10;
+     tev     
+-------------
+ 0.025001839 
+ 0.025001906 
+ 0.025001995 
+ 0.025002087 
+ 0.025002176 
+ 0.025002234 
+ 0.025002241 
+  0.02500219 
+  0.02500213 
+ 0.025001666 
+(10 rows)
+
+Query 20250603_061147_00000_qw5wc, FINISHED, 1 node
+Splits: 18 total, 18 done (100.00%)
+[Latency: client-side: 0:03, server-side: 0:03] [60K rows, 5B] [22.8K rows/s, 1B/s]
+
+Run VTK demo server:
+/home/rocky/demo/bin/run-viz.sh
+
+VTK log
+/tmp/viz.log
+
+Find and kill VTK
+ps aux | grep 'vtk-app/src/viz_srvr.py'
+kill -9 <pid>
+
+
+
+
